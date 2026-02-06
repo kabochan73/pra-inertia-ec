@@ -1,8 +1,9 @@
 import ProductCard from '@/Components/ProductCard';
+import SearchForm from '@/Components/SearchForm';
 import ShopLayout from '@/Layouts/ShopLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Index({ products }) {
+export default function Index({ products, search }) {
     return (
         <ShopLayout>
             <Head title="商品一覧" />
@@ -14,6 +15,8 @@ export default function Index({ products }) {
                 </p>
             </div>
 
+            <SearchForm search={search} />
+
             {products.length > 0 ? (
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                     {products.map((product) => (
@@ -22,7 +25,11 @@ export default function Index({ products }) {
                 </div>
             ) : (
                 <div className="text-center py-12">
-                    <p className="text-gray-500">商品がまだありません</p>
+                    <p className="text-gray-500">
+                        {search
+                            ? `「${search}」に一致する商品が見つかりませんでした`
+                            : '商品がまだありません'}
+                    </p>
                 </div>
             )}
         </ShopLayout>
