@@ -37,6 +37,9 @@ class HandleInertiaRequests extends Middleware
             'cartItemCount' => $request->user()
                 ? $request->user()->cartItems()->count()
                 : 0,
+            'flash' => $request->session()->get('flash')
+                ? ['message' => $request->session()->get('flash'), 'timestamp' => microtime(true)]
+                : null,
         ];
     }
 }

@@ -1,7 +1,17 @@
 import { Link, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function ShopLayout({ children }) {
-    const { auth, cartItemCount } = usePage().props;
+    const { auth, cartItemCount, flash } = usePage().props;
+    const [showFlash, setShowFlash] = useState(false);
+
+    useEffect(() => {
+        if (flash?.message) {
+            setShowFlash(true);
+            const timer = setTimeout(() => setShowFlash(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [flash?.timestamp]);
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -65,6 +75,12 @@ export default function ShopLayout({ children }) {
                     </div>
                 </div>
             </nav>
+
+            {showFlash && (
+                <div className="fixed top-4 right-4 z-50 rounded-lg bg-green-500 px-4 py-3 text-sm font-medium text-white shadow-lg">
+                    {flash?.message}
+                </div>
+            )}
 
             <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
                 {children}

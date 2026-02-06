@@ -38,7 +38,7 @@ class CartController extends Controller
             ]);
         }
 
-        return back();
+        return back()->with('flash', 'カートに追加しました。');
     }
 
     public function update(Request $request, CartItem $cartItem)
