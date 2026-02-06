@@ -8,7 +8,7 @@ export default function ShopLayout({ children }) {
     useEffect(() => {
         if (flash?.message) {
             setShowFlash(true);
-            const timer = setTimeout(() => setShowFlash(false), 3000);
+            const timer = setTimeout(() => setShowFlash(false), 1000);
             return () => clearTimeout(timer);
         }
     }, [flash?.timestamp]);

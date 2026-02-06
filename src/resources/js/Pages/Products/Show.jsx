@@ -84,7 +84,7 @@ export default function Show({ product }) {
                             ) : (
                                 <Link
                                     href={route('login')}
-                                    className="block w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                                    className="block w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transform transition-all active:scale-95 active:translate-y-0.5"
                                 >
                                     ログインしてカートに追加
                                 </Link>

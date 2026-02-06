@@ -66,6 +66,6 @@ class CartController extends Controller
 
         $cartItem->delete();
 
-        return back();
+        return back()->with('flash', 'カートから削除しました。');
     }
 }
