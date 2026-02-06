@@ -1,7 +1,8 @@
 import ShopLayout from '@/Layouts/ShopLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 
 export default function Show({ product }) {
+    const { auth } = usePage().props;
     const formatPrice = (price) => {
         return new Intl.NumberFormat('ja-JP', {
             style: 'currency',
@@ -71,6 +72,24 @@ export default function Show({ product }) {
                                 </p>
                             </div>
                         )}
+
+                        <div className="mt-8">
+                            {auth?.user ? (
+                                <button
+                                    onClick={() => router.post(route('cart.store'), { product_id: product.id })}
+                                    className="w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                                >
+                                    カートに追加
+                                </button>
+                            ) : (
+                                <Link
+                                    href={route('login')}
+                                    className="block w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                                >
+                                    ログインしてカートに追加
+                                </Link>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
