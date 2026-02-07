@@ -1,5 +1,5 @@
 import ShopLayout from '@/Layouts/ShopLayout';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 
 export default function Index({ cartItems }) {
     const formatPrice = (price) => {
@@ -20,6 +20,12 @@ export default function Index({ cartItems }) {
 
     const removeItem = (cartItem) => {
         router.delete(route('cart.destroy', cartItem.id));
+    };
+
+    const { post, processing } = useForm({});
+
+    const handleCheckout = () => {
+        post(route('checkout.store'));
     };
 
     return (
@@ -112,6 +118,13 @@ export default function Index({ cartItems }) {
                             <span>合計</span>
                             <span>{formatPrice(total)}</span>
                         </div>
+                        <button
+                            onClick={handleCheckout}
+                            disabled={processing}
+                            className="mt-4 w-full rounded-lg bg-indigo-600 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
+                        >
+                            {processing ? '処理中...' : 'レジに進む'}
+                        </button>
                     </div>
                 </div>
             )}

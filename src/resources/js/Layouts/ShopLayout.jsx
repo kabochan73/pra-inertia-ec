@@ -41,6 +41,12 @@ export default function ShopLayout({ children }) {
                                         )}
                                     </Link>
                                     <Link
+                                        href={route('orders.index')}
+                                        className="text-sm text-gray-600 hover:text-gray-900"
+                                    >
+                                        注文履歴
+                                    </Link>
+                                    <Link
                                         href={route('admin.products.index')}
                                         className="text-sm text-gray-600 hover:text-gray-900"
                                     >
