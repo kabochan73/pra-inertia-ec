@@ -17,11 +17,12 @@ class ProductController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                      ->orWhere('description', 'like', "%{$search}%");
+                        ->orWhere('description', 'like', "%{$search}%");
                 });
             })
             ->latest()
-            ->get();
+            ->paginate(4)
+            ->withQueryString();
 
         return Inertia::render('Products/Index', [
             'products' => $products,
